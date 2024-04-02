@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { AdminModel } = require("../model/user_model");
+const { AdminModel } = require("../model/admin_model");
 require("dotenv").config();
 
 // Middleware to verify and authenticate admin

@@ -79,6 +79,7 @@ const postCart = async (req, res) => {
     res
       .status(500)
       .json({ error: "An error occurred while posting the new product" });
+      console.log(req.body);
   }
 };
 
