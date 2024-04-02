@@ -7,6 +7,7 @@ const { adminRouter } = require('./routes/admin_routes');
 const { productRouter } = require('./routes/product_routes');
 const { cartRouter } = require('./routes/cart_routes');
 const { authorizedMiddleware } = require('./middleware/authorizedMiddleware');
+const { orderRouter } = require('./routes/order_routes');
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use("/user", userRouter);
 app.use('/admin', adminRouter);
 app.use('/product', productRouter);
 app.use('/cart', authorizedMiddleware, cartRouter);
+app.use('/order', orderRouter);
 
 // Not found route
 app.use((req, res) => {
