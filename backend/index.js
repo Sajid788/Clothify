@@ -5,6 +5,7 @@ const { connection } = require("./config/db");
 const { userRouter } = require("./routes/user_routes");
 const { adminRouter } = require('./routes/admin_routes');
 const { productRouter } = require('./routes/product_routes');
+const { cartRouter } = require('./routes/cart_routes');
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use('/admin', adminRouter);
 app.use('/product', productRouter);
+app.use('/cart',   cartRouter);
 
 // Not found route
 app.use((req, res) => {
