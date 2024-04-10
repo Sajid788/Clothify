@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Divider, Flex, Heading, Text } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import Carousel from "../components/user/carousel/Carousel";
 import { handleProductData } from "../redux/User_Redux/products/action";
-
+import LoadingSpinner from "../components/user/spinner/Spinner";
 
 const Homepage = () => {
   const { products, isLoading } = useSelector((store) => store.productReducer);
@@ -51,7 +52,22 @@ const Homepage = () => {
         {description}
       </Text>
       <Divider mb={8} color="blue" />
- 
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <Box w="90%" margin="auto">
+            <Carousel
+              products={products.filter((ele, index) =>
+                category === "New Arrival"
+                  ? index % 2 === 0
+                  : ele.category === category
+              )}
+            />
+          </Box>
+          {renderExploreMoreButton(category)}
+        </>
+      )}
     </Flex>
   );
 
