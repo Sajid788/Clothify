@@ -10,6 +10,7 @@ import {
   import { authReducer } from './User_Redux/authentication/reducer';
   import { cartReducer } from './User_Redux/cart/reducer';
   import { orderReducer } from './User_Redux/order/reducer';
+  import { wishlistReducer } from './User_Redux/wishlist/reducer';
 
   const enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   
@@ -18,6 +19,7 @@ import {
     productReducer,
     cartReducer,
     orderReducer,
+    wishlistReducer,
   });
   export const store = legacy_createStore(
     rootReducer,
