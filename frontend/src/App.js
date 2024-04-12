@@ -6,6 +6,7 @@ import Routing from './routing/Routing';
 function App() {
   return (
     <div className="App">
+    
      <Routing/>
      <Footer/>
     </div>
