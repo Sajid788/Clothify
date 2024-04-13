@@ -4,17 +4,21 @@ import { useSelector } from 'react-redux';
 import { getQuantity } from '../../../utils/getquanity';
 import Container from '../Container';
 import AvatarNavbar from './AvatarNavbar';
-
+import DrawerComponent from './DrawerComponent';
 import HamburgerOptions from './Hamburger';
 import Logo from './Logo';
 import Menuitem from './Menuitem';
-
+import OtherOptions from './OtherOptions';
+import Options from './ProductOptions';
 import Searchbar from './Searchbar';
 
 const Navbar = () => {
-  
+  const { cartData } = useSelector((store) => store.cartReducer);
+  const { wishlistData } = useSelector((store) => store.wishlistReducer);
   const authDetails = useSelector((store) => store.authReducer);
- 
+  const { orderData } = useSelector((store) => store.orderReducer);
+  const totalCartQuantity = getQuantity(cartData);
+  const totalWishlistQuantity = getQuantity(wishlistData);
   return (
     <Box
       backgroundColor={"white"}
@@ -43,7 +47,7 @@ const Navbar = () => {
             display={{ base: "none", lg: "flex" }}
             width={{ base: "auto", md: "30%" }}
           >
-           
+            <Options />
           </Box>
           <Box width={{ base: "auto", md: "25%" }}>
             <Searchbar />
@@ -53,7 +57,7 @@ const Navbar = () => {
             display={{ base: "none", lg: "flex" }}
             width={{ base: "auto", md: "15%" }}
           >
-           
+            <OtherOptions />
           </Box>
 
           <Box width={{ base: "auto", md: "5%" }}>
@@ -62,8 +66,15 @@ const Navbar = () => {
             </Menuitem>
           </Box>
           <Box display={{ base: "flex", lg: "none" }} alignItems={"center"}>
-           
-
+            <DrawerComponent
+              totalCartQuantity={totalCartQuantity}
+              totalWishlistQuantity={totalWishlistQuantity}
+              isAuth={authDetails.isAuth}
+              orderData={orderData}
+            >
+              {" "}
+              <HamburgerOptions />
+            </DrawerComponent>
           </Box>
         </Box>
       </Container>
