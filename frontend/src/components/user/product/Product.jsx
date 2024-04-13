@@ -27,7 +27,8 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { handleProductData } from "../../../redux/User_Redux/products/action";
-
+import CardItem from "../card/CardItem";
+import Pagination from "../product/Pagination";
 import LoadingSpinner from "../spinner/Spinner";
 import NotFound from "./NotFound";
 
@@ -305,7 +306,7 @@ const Product = ({ category, subcategory, brands }) => {
             >
               {products.length > 0 &&
                 products.map((ele) => {
-               
+                  return <CardItem key={ele._id} {...ele} />;
                 })}
             </Grid>
           ) : (
@@ -313,7 +314,16 @@ const Product = ({ category, subcategory, brands }) => {
           )}
         </Box>
       </Box>
-   
+      {products.length ? (
+        <Pagination
+          onPageChange={handlePageChange}
+          currentPage={page}
+          totalPages={Math.ceil(totalCount / 6)}
+          totalCount={totalCount}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
