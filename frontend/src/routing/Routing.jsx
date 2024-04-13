@@ -4,6 +4,7 @@ import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import MenPage from "../pages/MenPage";
 import WomenPage from "../pages/WomenPage";
+import KidPage from "../pages/KidPage";
 
 const Routing = () => {
   return (
@@ -13,6 +14,7 @@ const Routing = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/men" element={<MenPage />} />
       <Route path="/women" element={<WomenPage />} />
+      <Route path="/kids" element={<KidPage />} />
     </Routes>
   );
 };
