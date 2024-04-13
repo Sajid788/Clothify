@@ -22,7 +22,7 @@ const OtherOptions = () => {
     if (isAuth) {
       dispatch(handleGetCartData());
       dispatch(handleWishlistCartData());
-      dispatch(handleGetOrderData());
+      // dispatch(handleGetOrderData());   // an issue undefined (reading 'length')
     }
   }, [isAuth]);
   return (
@@ -100,7 +100,7 @@ const OtherOptions = () => {
               fontSize="xs"
               color="white"
             >
-              {isAuth && orderData.length ? orderData.length : 0}
+              {isAuth &&  orderData.length ?  orderData.length : 0}
             </Box>
           </Flex>
         </Link>
