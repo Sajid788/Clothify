@@ -73,7 +73,7 @@ const Homepage = () => {
 
   return (
     <Box mt={{ base: "20", lg: 0 }}>
-      <Box maxW="80%" mx="auto" mt={12} p={6} bg="gray.100" rounded="md" mb={4}>
+      <Box maxW="80%" mx="auto" mt={20} p={6} bg="gray.100" rounded="md" mb={4}>
         <Heading as="h3" size="lg" mb={4} textAlign="center">
           Welcome to Our Store!
         </Heading>

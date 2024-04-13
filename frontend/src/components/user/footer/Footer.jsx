@@ -54,7 +54,7 @@ import {
           <Tooltip label="Twitter" hasArrow placement="top">
             <IconButton
               as="a"
-              href="https://twitter.com/uzairansari_11"
+              href="https://twitter.com/Mdsajid40036903"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"
@@ -68,7 +68,7 @@ import {
           <Tooltip label="Instagram" hasArrow placement="top">
             <IconButton
               as="a"
-              href="https://www.instagram.com/____uzairrrr____/"
+              href="https://www.instagram.com/sajid_alam078/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -82,7 +82,7 @@ import {
           <Tooltip label="Facebook" hasArrow placement="top">
             <IconButton
               as="a"
-              href="https://www.facebook.com/profile.php?id=100052309576182"
+              href=" "
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -97,7 +97,7 @@ import {
           <Tooltip label="WhatsApp" hasArrow placement="top">
             <IconButton
               as="a"
-              href="https://wa.me/7271880500"
+              href="https://wa.me/7061541556"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -128,7 +128,7 @@ import {
           </Link>
           <Divider my={2} borderColor="white" />
           <Flex justifyContent="center" alignItems="center">
-            <Tooltip label="Owner: Uzair Ansari" hasArrow placement="top">
+            <Tooltip label="Owner: Md Sajid Ansari" hasArrow placement="top">
               <IconButton
                 as="span"
                 aria-label="Owner"
@@ -140,7 +140,7 @@ import {
                 _hover={hoverEffect}
               />
             </Tooltip>
-            <Text>Owned by Uzair Ansari</Text>
+            <Text>Owned Md Sajid Ansari</Text>
           </Flex>
           <Flex justifyContent="center" alignItems="center" mt={2}>
             <Tooltip label="Secure Website" hasArrow placement="top">
