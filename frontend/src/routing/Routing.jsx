@@ -6,6 +6,8 @@ import MenPage from "../pages/MenPage";
 import WomenPage from "../pages/WomenPage";
 import KidPage from "../pages/KidPage";
 import SingleProduct from "../pages/SingleProduct";
+import CartPage from "../pages/Cart";
+import PrivateRoute from "../components/hoc/PrivateRoute";
 
 const Routing = () => {
   return (
@@ -17,6 +19,7 @@ const Routing = () => {
       <Route path="/women" element={<WomenPage />} />
       <Route path="/kids" element={<KidPage />} />
       <Route path="/product/:id" element={<SingleProduct />} />
+      <Route path="/cart" element={ <PrivateRoute>{" "}<CartPage /></PrivateRoute>} />
     </Routes>
   );
 };
