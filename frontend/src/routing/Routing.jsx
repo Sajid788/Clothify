@@ -10,6 +10,7 @@ import CartPage from "../pages/Cart";
 import PrivateRoute from "../components/hoc/PrivateRoute";
 import WishlistPage from "../pages/WishlistPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import OrderHistoryPage from "../pages/OrderHistoryPage";
 
 const Routing = () => {
   return (
@@ -24,6 +25,7 @@ const Routing = () => {
       <Route path="/cart" element={ <PrivateRoute><CartPage /></PrivateRoute>} />
       <Route path="/wishlist" element={<PrivateRoute><WishlistPage /> </PrivateRoute>} />
       <Route path="/checkout" element={<PrivateRoute> <CheckoutPage /></PrivateRoute>} />
+      <Route path="/orderhistory" element={<PrivateRoute><OrderHistoryPage /></PrivateRoute>}/>
     </Routes>
   );
 };
