@@ -1,199 +1,146 @@
 import {
-    Badge,
-    Box,
-    Button,
-    Flex,
-    IconButton,
-    Image,
-    Select,
-    Spinner,
-    Text,
-    useColorModeValue,
-    useToast,
-  } from "@chakra-ui/react";
-  import React, { useState } from "react";
-  import { FiHeart, FiShoppingBag } from "react-icons/fi";
-  import { useDispatch, useSelector } from "react-redux";
-  import { Link } from "react-router-dom";
-  
-  import { handleAddToCartData } from "../../../redux/User_Redux/cart/action";
-  import { handleAddToWishlistData } from "../../../redux/User_Redux/wishlist/action";
-  
-  const CartItem = ({
-    title,
-    brand,
-    price,
-    discount,
-    rating,
-    total_rating,
-    images,
-    sizes,
-    _id,
-    category,
-    subcategory,
-  }) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const [isCartLoading, setIsCartLoading] = useState(false);
-    const [isWishlistLoading, setIsWishlistLoading] = useState(false);
-    const heartColor = useColorModeValue("red.500", "red.200");
-    const [selectedSize, setSelectedSize] = useState(sizes[0]);
-    const dispatch = useDispatch();
-    const { isAuth } = useSelector((store) => store.authReducer);
-    const toast = useToast();
-    const payload = {
-      title,
-      category,
-      subcategory,
-      brand,
-      price,
-      discount,
-      images,
-      quantity: 1,
-      size: selectedSize,
-      productId: _id,
-    };
-  
-    const handleAddToCart = () => {
-      if (!isAuth) {
-        toast({
-          title: `Please Login First`,
-          status: "warning",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
-        return;
-      }
-      setIsCartLoading(true);
-      setTimeout(() => {
-        dispatch(handleAddToCartData(payload));
-        setIsCartLoading(false);
-      }, 300);
-    };
-  
-    const handleAddToWishlist = () => {
-      if (!isAuth) {
-        toast({
-          title: `Please Login First`,
-          status: "warning",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
-        return;
-      }
-      setIsWishlistLoading(true);
-      setTimeout(() => {
-        dispatch(handleAddToWishlistData(payload));
-        setIsWishlistLoading(false);
-      }, 300);
-    };
-  
-    return (
-      <Box
-        maxW="sm"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        position="relative"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        bg={isHovered ? "gray.100" : "white"}
-        boxShadow={isHovered ? "md" : "none"}
-        transition="background-color 0.3s, box-shadow 0.3s"
-      >
-        <Link to={`/product/${_id}`}>
+  Box,
+  Button,
+  Flex,
+  Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  AiOutlineDelete,
+  AiOutlineDollar,
+  AiOutlineTag,
+} from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+const CartItemCard = ({
+  images,
+  quantity,
+  size,
+  title,
+  price,
+  _id,
+  productId,
+  handleRemoveItem,
+  handleQuantityChange,
+}) => {
+  const [selectedQuantity, setSelectedQuantity] = useState(quantity);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleQuantity = (e) => {
+    const newQuantity = parseInt(e.target.value);
+    const payload = { quantity: newQuantity };
+    handleQuantityChange(_id, payload);
+    setSelectedQuantity(newQuantity);
+  };
+
+  const handleDelete = (id) => {
+    handleRemoveItem(id);
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => { }, [selectedQuantity]);
+
+  return (
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      p={4}
+      width="100%"
+      marginBottom={4}
+      bg="white"
+    >
+      <Flex flexWrap="wrap" justifyContent="space-between">
+        <Link to={`/product/${productId}`}>
           <Image
-            src={isHovered ? images[1] : images[0]}
-            alt="Product"
-            width="100%"
-            height="300px"
+            src={images?.[0]}
+            alt={title}
+            boxSize={{ base: "120px", sm: "150px" }}
             objectFit="contain"
+            mb={{ base: 4, sm: 0 }}
           />
         </Link>
-        <Box p="4" textAlign="center">
-          <Badge colorScheme="teal" fontWeight="semibold" fontSize="sm" mb="2">
-            {brand}
-          </Badge>
-          <Text
-            fontWeight="semibold"
-            fontSize="lg"
-            mb="2"
-            color={isHovered ? "teal.500" : "black"}
-          >
+        <Box ml={4} flex="1">
+          <Text fontWeight="bold" fontSize="xl" mb={2} textAlign="left">
             {title}
           </Text>
-          <Flex alignItems="center" justifyContent="space-between" mb="2">
-            <Flex alignItems="center">
-              <Text fontWeight="semibold" fontSize="lg" mr="1">
-                $ {price}
-              </Text>
-              <Text fontSize="sm" color="gray.500">
-                ({discount}% off)
-              </Text>
+          <Flex align="center" justify="space-between">
+            <Flex align="center">
+              <Tooltip label="Price" aria-label="Price">
+                <Flex align="center" mr={4}>
+                  <AiOutlineDollar size={18} />
+                  <Text fontSize="lg" ml={2}>
+                    {price}
+                  </Text>
+                </Flex>
+              </Tooltip>
+              <Tooltip label="Size" aria-label="Size">
+                <Flex align="center">
+                  <AiOutlineTag size={18} />
+                  <Text fontSize="lg" ml={2}>
+                    {size}
+                  </Text>
+                </Flex>
+              </Tooltip>
             </Flex>
-            <Flex alignItems="center">
-              <Text fontSize="sm" fontWeight="bold" mr="1" color="gray.500">
-                Rating:
-              </Text>
-              <Box as="span" color="yellow.400">
-                {rating}
-              </Box>
-              <Box as="span" color="gray.500" ml="1">
-                ({total_rating})
-              </Box>
-            </Flex>
-          </Flex>
-          <Flex alignItems="center" justifyContent="space-between" mb="2">
-            <Flex alignItems="center">
-              <Text fontSize="sm" fontWeight="bold" mr="1" color="gray.500">
-                Sizes:
-              </Text>
+            <Flex align="center">
               <Select
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
-                size="sm"
-                width="auto"
-                mr="1"
+                value={selectedQuantity}
+                onChange={handleQuantity}
                 variant="outline"
-                colorScheme="teal"
-                borderRadius="md"
+                colorScheme="green"
+                size="sm"
               >
-                {sizes.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
+                {[...Array(10)].map((_, index) => (
+                  <option key={index} value={index + 1}>
+                    {index + 1}
                   </option>
                 ))}
               </Select>
+              <Tooltip label="Delete Item" aria-label="Delete Item">
+                <Box ml={4}>
+                  <AiOutlineDelete
+                    size={24}
+                    color="red"
+                    cursor="pointer"
+                    onClick={() => setIsModalOpen(true)}
+                  />
+                </Box>
+              </Tooltip>
             </Flex>
-            <Button
-              colorScheme="teal"
-              size="sm"
-              leftIcon={<FiShoppingBag />}
-              onClick={handleAddToCart}
-              isLoading={isCartLoading}
-              loadingText="Adding..."
-              _hover={{ opacity: "0.8" }}
-            >
-              Add to Cart
-            </Button>
           </Flex>
-          <IconButton
-            icon={isWishlistLoading ? <Spinner size="sm" /> : <FiHeart />}
-            color={heartColor}
-            size="md"
-            aria-label="Add to Wishlist"
-            position="absolute"
-            top="2"
-            right="2"
-            opacity={isHovered ? "1" : "0"}
-            transition="opacity 0.3s"
-            onClick={handleAddToWishlist}
-            disabled={isWishlistLoading}
-          />
         </Box>
-      </Box>
-    );
-  };
-  
-  export default React.memo(CartItem);
+      </Flex>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Confirm Deletion</ModalHeader>
+          <ModalBody>
+            Are you sure you want to delete this item from your cart?
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="red" mr={3} onClick={() => handleDelete(_id)}>
+              Delete
+            </Button>
+            <Button variant="ghost" onClick={() => setIsModalOpen(false)}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Box>
+  );
+};
+
+export default CartItemCard;

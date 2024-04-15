@@ -68,6 +68,13 @@ import {
       setTimeout(() => {
         dispatch(handleAddToCartData(payload));
         setIsCartLoading(false);
+        toast({
+          title: `Added ${title} to cart`,
+          position:"top",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
       }, 300);
     };
   

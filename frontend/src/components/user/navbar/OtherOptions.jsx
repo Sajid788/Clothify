@@ -22,7 +22,7 @@ const OtherOptions = () => {
     if (isAuth) {
       dispatch(handleGetCartData());
       dispatch(handleWishlistCartData());
-      // dispatch(handleGetOrderData());   // an issue undefined (reading 'length')
+      dispatch(handleGetOrderData());   // an issue undefined (reading 'length')
     }
   }, [isAuth]);
   return (
