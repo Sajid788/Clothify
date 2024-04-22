@@ -64,7 +64,7 @@ To run this project, you will need to add the following environment variables to
 ![Screenshot 2024-04-15 172026](https://github.com/Sajid788/Clothify/assets/129252454/129458e0-ac79-4d58-88d1-7d98c8410fd5)
 
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=comfortaa&color=4cd964&size=24&width=500&lines=Currently+I+am+Working+on+Admin+Section...)](https://git.io/typing-svg)
+
 
 
 
